@@ -40,7 +40,7 @@ if __name__ == '__main__':
             pickle.dump(y, data)  
             
     mlflow.set_tracking_uri("./mlruns")
-    dataset_name = "Breast Cancer Wisconsin (Diagnostic)"
+    dataset_name = "Breast Cancer Wisconsin (Diagnostic v2)"
     current_time = datetime.datetime.now().strftime("%y%m%d_%H%M%S")
     experiment_name = f"{dataset_name}_{current_time}"    
     experiment_id = mlflow.create_experiment(f"{experiment_name}")

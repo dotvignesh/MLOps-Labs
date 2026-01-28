@@ -26,7 +26,7 @@ Watch the tutorial video for this lab at [Github action Lab2](https://youtu.be/c
 
 # Running the Workflow
 ## Customize Model Training
-1. Modify the `train_model.py` script in the `src/` directory according to your dataset and model requirements. This script currently uses scikit-learn's Breast Cancer Wisconsin dataset for demonstration purposes.
+1. Modify the `train_model.py` script in the `src/` directory according to your dataset and model requirements. This script currently uses scikit-learn's Breast Cancer Wisconsin dataset for demo purposes.
 
 ## Push Your Changes:
 1. Commit your changes and push them to your forked repository.
