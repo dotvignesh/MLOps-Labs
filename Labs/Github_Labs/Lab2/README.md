@@ -84,7 +84,13 @@ Let's break down how this workflow operates step by step:
 - This final step involves committing the calibrated model and any other relevant files to the repository. It is essential to keep track of the changes made during the calibration process and to store the calibrated model in the repository for future applications and reference.
 
 # Customization
-The `model_calibration_on_push.yml` workflow can be customized to align with your specific project requirements. You can modify calibration methods, the directory where the calibrated model is saved, or any other aspects of the calibration process to meet your project's unique needs.
+The `model_calibration_on_push.yml` workflow can be customized to align with your specific project requirements. The workflow now runs `src/calibrate_model.py`, which wraps `CalibratedClassifierCV` over the latest trained model. To tweak how calibration runs:
+
+1. Adjust the job-level environment variables in `workflows/model_calibration_on_push.yml`:
+   - `CALIBRATION_METHOD`: choose between `isotonic` and `sigmoid`.
+   - `CALIBRATION_OUTPUT_DIR`: change where the calibrated artifacts are saved (defaults to `models/calibrated`).
+2. Update `src/calibrate_model.py` if you need to inject a different dataset, logging approach, or calibration strategy.
+3. When pushing changes, the workflow will stage the calibrated model along with the regular retrained artifacts so your repository stays in sync.
 
 # Integration with Model Training
 This workflow is designed to work seamlessly with the main model training workflow, `model_retraining_on_push.yml`. In the initial workflow, the model is trained, and in this workflow, the calibrated model is generated. The calibrated model can then be used in applications where precise, well-calibrated probabilities are essential.
