@@ -26,7 +26,7 @@ Watch the tutorial video for this lab at [Github action Lab2](https://youtu.be/c
 
 # Running the Workflow
 ## Customize Model Training
-1. Modify the `train_model.py` script in the `src/` directory according to your dataset and model requirements. This script generates synthetic data for demonstration purposes.
+1. Modify the `train_model.py` script in the `src/` directory according to your dataset and model requirements. This script currently uses scikit-learn's Breast Cancer Wisconsin dataset for demonstration purposes.
 
 ## Push Your Changes:
 1. Commit your changes and push them to your forked repository.
@@ -50,8 +50,8 @@ Each time you run the workflow, a new version of the model is created and stored
 The workflow consists of the following steps:
 
 - Generate and Store Timestamp: A timestamp is generated and stored in a file for versioning.
-- Model Training: The `train_model.py` script is executed, which trains a random forest classifier on synthetic data and stores the model in the `models/` directory.
-- Model Evaluation: The `evaluate_model.py` script is executed to evaluate the model's F1 Score on synthetic data, and the results are stored in the `metrics/` directory.
+- Model Training: The `train_model.py` script is executed, which trains a random forest classifier on scikit-learn's Breast Cancer Wisconsin dataset and stores the model in the `models/` directory.
+- Model Evaluation: The `evaluate_model.py` script is executed to evaluate the model's F1 Score on the same dataset, and the results are stored in the `metrics/` directory.
 - Store and Version the New Model: The trained model is moved to the `models/` directory with a timestamp-based version.
 - Commit and Push Changes: The metrics and updated model are committed to the repository, allowing you to track changes.
 
@@ -98,4 +98,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 # Questions or Issues
 If you have any questions or encounter issues while using this GitHub Actions workflow, please open an issue in the Issues section of your repository.
-
