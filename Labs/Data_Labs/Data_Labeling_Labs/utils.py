@@ -84,7 +84,8 @@ def get_keras_lstm(num_buckets, embed_dim=16, rnn_state_size=64):
     lstm_model.add(tf.keras.layers.Embedding(num_buckets, embed_dim))
     lstm_model.add(tf.keras.layers.LSTM(rnn_state_size, activation=tf.nn.relu))
     lstm_model.add(tf.keras.layers.Dense(1, activation=tf.nn.sigmoid))
-    lstm_model.compile("Adagrad", "binary_crossentropy", metrics=["accuracy"])
+    # Adam avoids MPS incompatibilities seen with Adagrad + Embedding on macOS.
+    lstm_model.compile("Adam", "binary_crossentropy", metrics=["accuracy"])
     return lstm_model
 
 
