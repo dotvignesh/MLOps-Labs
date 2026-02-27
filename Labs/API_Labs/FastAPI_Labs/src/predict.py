@@ -1,13 +1,28 @@
+from pathlib import Path
+from typing import Sequence
+
 import joblib
 
-def predict_data(X):
+MODEL_PATH = Path(__file__).resolve().parent.parent / "model" / "wine_model.pkl"
+
+
+def predict_data(X: Sequence[Sequence[float]]):
     """
-    Predict the class labels for the input data.
+    Predict class labels and probabilities for input data.
     Args:
-        X (numpy.ndarray): Input data for which predictions are to be made.
+        X (Sequence[Sequence[float]]): Input data for predictions.
     Returns:
-        y_pred (numpy.ndarray): Predicted class labels.
+        tuple: Predicted labels, class probabilities, and class names.
     """
-    model = joblib.load("../model/iris_model.pkl")
+    if not MODEL_PATH.exists():
+        raise FileNotFoundError(
+            f"Model file not found at {MODEL_PATH}. "
+            "Train the model first with `uv run python -m src.train`."
+        )
+
+    model_bundle = joblib.load(MODEL_PATH)
+    model = model_bundle["model"]
+    class_names = [str(name) for name in model_bundle["target_names"]]
     y_pred = model.predict(X)
-    return y_pred
+    y_prob = model.predict_proba(X)
+    return y_pred, y_prob, class_names
