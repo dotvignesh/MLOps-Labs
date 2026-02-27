@@ -1,7 +1,6 @@
 # FastAPI Lab (Custom Version)
 
 This is my custom version of the FastAPI lab.
-It is not identical to the original repo.
 
 ## What I changed
 
