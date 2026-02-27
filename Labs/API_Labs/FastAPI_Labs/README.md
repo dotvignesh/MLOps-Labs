@@ -9,6 +9,15 @@ This is my custom version of the FastAPI lab.
 3. I added a small dashboard endpoint: `/dashboard`.
 4. I added a training report file (`model/training_report.json`) with metrics.
 
+## How this extends the original repo
+
+The original lab trains a Decision Tree on Iris and returns only a class id from `/predict`.
+My version extends that baseline in three ways:
+
+1. It uses a different dataset (Wine) with 13 features, so input design and model behavior are different.
+2. It uses a different model (Random Forest), which is an ensemble method and gives class probabilities.
+3. It adds a lightweight dashboard (`/dashboard`) that shows saved training metrics (accuracy and per-class scores), so the API is easier to inspect and explain.
+
 ## Project structure
 
 ```text
