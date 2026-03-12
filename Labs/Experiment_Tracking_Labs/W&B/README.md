@@ -12,7 +12,7 @@ The main goal in both notebooks is to practice experiment tracking with Weights 
 1. Open the project folder:
 
 ```bash
-cd "/Users/vigneshraja/Documents/NEU Notes/MLOps/MLOps-Labs/Labs/Experiment_Tracking_Labs/W&B"
+cd "MLOps-Labs/Labs/Experiment_Tracking_Labs/W&B"
 ```
 
 2. Create a virtual environment with `uv`:
