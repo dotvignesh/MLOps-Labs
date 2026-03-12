@@ -1,0 +1,108 @@
+_wandb:
+    value:
+        cli_version: 0.25.1
+        e:
+            q5heavibakfjazjl4ccla5bbejn3bx1d:
+                apple: {}
+                codePath: Labs/Experiment_Tracking_Labs/W&B/Lab2.ipynb
+                cpu_count: 10
+                cpu_count_logical: 10
+                disk:
+                    /:
+                        total: "494384795648"
+                        used: "252203073536"
+                email: vigneshvrs5@gmail.com
+                executable: /Users/vigneshraja/.cache/uv/builds-v0/.tmpGzdzVx/bin/python
+                git:
+                    commit: c7eeb13fb3d893bba96f8972b2a02bc08e03b367
+                    remote: https://github.com/dotvignesh/MLOps-Labs.git
+                host: Vigneshs-MacBook-Pro.local
+                memory:
+                    total: "17179869184"
+                os: macOS-26.3.1-arm64-arm-64bit-Mach-O
+                program: Labs/Experiment_Tracking_Labs/W&B/Lab2.ipynb
+                python: CPython 3.13.7
+                root: /Users/vigneshraja/Documents/NEU Notes/MLOps/MLOps-Labs/Labs/Experiment_Tracking_Labs/W&B
+                startedAt: "2026-03-12T19:37:59.200644Z"
+                writerId: q5heavibakfjazjl4ccla5bbejn3bx1d
+        m:
+            - "1": epoch/epoch
+              "6":
+                - 3
+              "7": []
+            - "2": epoch/*
+              "5": 1
+              "6":
+                - 1
+              "7": []
+        python_version: 3.13.7
+        t:
+            "1":
+                - 2
+                - 3
+                - 5
+                - 53
+            "2":
+                - 2
+                - 3
+                - 5
+                - 53
+            "3":
+                - 2
+                - 7
+                - 13
+                - 16
+                - 38
+                - 39
+                - 62
+            "4": 3.13.7
+            "5": 0.25.1
+            "8":
+                - 1
+            "12": 0.25.1
+            "13": darwin-arm64
+        visualize:
+            validation_confusion_matrix:
+                panel_config:
+                    fieldSettings:
+                        Actual: Actual
+                        Predicted: Predicted
+                        nPredictions: nPredictions
+                    panelDefId: wandb/confusion_matrix/v1
+                    stringSettings:
+                        title: Confusion Matrix Curve
+                    transform:
+                        name: tableWithLeafColNames
+                    userQuery:
+                        queryFields:
+                            - args:
+                                - name: runSets
+                                  value: ${runSets}
+                              fields:
+                                - fields: []
+                                  name: id
+                                - fields: []
+                                  name: name
+                                - fields: []
+                                  name: _defaultColorIndex
+                                - args:
+                                    - name: tableKey
+                                      value: validation_confusion_matrix_table
+                                  fields: []
+                                  name: summaryTable
+                              name: runSets
+                panel_type: Vega2
+batch_size:
+    value: 128
+dropout:
+    value: 0.25
+epochs:
+    value: 4
+learning_rate:
+    value: 0.001
+random_seed:
+    value: 42
+test_samples:
+    value: 2500
+train_samples:
+    value: 12000

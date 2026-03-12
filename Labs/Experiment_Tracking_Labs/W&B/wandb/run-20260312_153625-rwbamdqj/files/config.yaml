@@ -1,0 +1,93 @@
+_wandb:
+    value:
+        cli_version: 0.25.1
+        e:
+            4i1vj3x7xqikg1rhk5wch8csi7htwz94:
+                apple: {}
+                codePath: Labs/Experiment_Tracking_Labs/W&B/Lab1.ipynb
+                cpu_count: 10
+                cpu_count_logical: 10
+                disk:
+                    /:
+                        total: "494384795648"
+                        used: "252114759680"
+                email: vigneshvrs5@gmail.com
+                executable: /Users/vigneshraja/.cache/uv/builds-v0/.tmpGzdzVx/bin/python
+                git:
+                    commit: c7eeb13fb3d893bba96f8972b2a02bc08e03b367
+                    remote: https://github.com/dotvignesh/MLOps-Labs.git
+                host: Vigneshs-MacBook-Pro.local
+                memory:
+                    total: "17179869184"
+                os: macOS-26.3.1-arm64-arm-64bit-Mach-O
+                program: Labs/Experiment_Tracking_Labs/W&B/Lab1.ipynb
+                python: CPython 3.13.7
+                root: /Users/vigneshraja/Documents/NEU Notes/MLOps/MLOps-Labs/Labs/Experiment_Tracking_Labs/W&B
+                startedAt: "2026-03-12T19:36:25.110735Z"
+                writerId: 4i1vj3x7xqikg1rhk5wch8csi7htwz94
+        m: []
+        python_version: 3.13.7
+        t:
+            "1":
+                - 5
+                - 53
+            "2":
+                - 5
+                - 53
+            "3":
+                - 2
+                - 13
+                - 16
+                - 62
+            "4": 3.13.7
+            "5": 0.25.1
+            "8":
+                - 1
+            "12": 0.25.1
+            "13": darwin-arm64
+        visualize:
+            top_feature_importance:
+                panel_config:
+                    fieldSettings:
+                        label: feature
+                        value: importance
+                    panelDefId: wandb/bar/v0
+                    stringSettings:
+                        title: Top 8 feature importances
+                    transform:
+                        name: tableWithLeafColNames
+                    userQuery:
+                        queryFields:
+                            - args:
+                                - name: runSets
+                                  value: ${runSets}
+                              fields:
+                                - fields: []
+                                  name: id
+                                - fields: []
+                                  name: name
+                                - fields: []
+                                  name: _defaultColorIndex
+                                - args:
+                                    - name: tableKey
+                                      value: top_feature_importance_table
+                                  fields: []
+                                  name: summaryTable
+                              name: runSets
+                panel_type: Vega2
+        viz:
+            confusion_matrix:
+                historyFieldSettings:
+                    key: confusion_matrix
+                    x-axis: _step
+                id: wandb/confusion_matrix/v1
+max_depth:
+    value: 8
+min_samples_split:
+    value: 4
+n_estimators:
+    value: 180
+random_state:
+    value: 42
+test_size:
+    value: 0.2
