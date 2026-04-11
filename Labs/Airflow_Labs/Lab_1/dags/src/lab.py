@@ -6,16 +6,51 @@ import pickle
 import os
 import base64
 
+CLUSTER_COLUMNS = ["BALANCE", "PURCHASES", "CREDIT_LIMIT"]
+
+
 def load_data():
     """
     Loads data from a CSV file, serializes it, and returns the serialized data.
     Returns:
         str: Base64-encoded serialized data (JSON-safe).
     """
-    print("We are here")
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), "../data/file.csv"))
+    print(f"Loaded {len(df)} rows from file.csv")
     serialized_data = pickle.dumps(df)                    # bytes
     return base64.b64encode(serialized_data).decode("ascii")  # JSON-safe string
+
+
+def profile_training_data(data_b64: str):
+    """
+    Checks the training data before preprocessing and returns a small profile.
+    """
+    data_bytes = base64.b64decode(data_b64)
+    df = pickle.loads(data_bytes)
+
+    missing_columns = [column for column in CLUSTER_COLUMNS if column not in df.columns]
+    if missing_columns:
+        raise ValueError(f"Missing required columns: {', '.join(missing_columns)}")
+
+    profile = {
+        "rows": int(len(df)),
+        "columns": int(len(df.columns)),
+        "missing_values": {
+            column: int(df[column].isna().sum())
+            for column in CLUSTER_COLUMNS
+        },
+        "means": {
+            column: round(float(df[column].mean()), 2)
+            for column in CLUSTER_COLUMNS
+        },
+    }
+
+    print(f"Training rows: {profile['rows']}")
+    print(f"Training columns: {profile['columns']}")
+    print(f"Missing values in model columns: {profile['missing_values']}")
+    print(f"Mean values for model columns: {profile['means']}")
+    return profile
+
 
 def data_preprocessing(data_b64: str):
     """
@@ -27,7 +62,8 @@ def data_preprocessing(data_b64: str):
     df = pickle.loads(data_bytes)
 
     df = df.dropna()
-    clustering_data = df[["BALANCE", "PURCHASES", "CREDIT_LIMIT"]]
+    clustering_data = df[CLUSTER_COLUMNS]
+    print(f"Prepared {len(clustering_data)} rows with columns: {', '.join(CLUSTER_COLUMNS)}")
 
     min_max_scaler = MinMaxScaler()
     clustering_data_minmax = min_max_scaler.fit_transform(clustering_data)
@@ -59,6 +95,7 @@ def build_save_model(data_b64: str, filename: str):
     output_path = os.path.join(output_dir, filename)
     with open(output_path, "wb") as f:
         pickle.dump(kmeans, f)
+    print(f"Saved KMeans model to {output_path}")
 
     return sse  # list is JSON-safe
 
@@ -66,7 +103,7 @@ def build_save_model(data_b64: str, filename: str):
 def load_model_elbow(filename: str, sse: list):
     """
     Loads the saved model and uses the elbow method to report k.
-    Returns the first prediction (as a plain int) for test.csv.
+    Returns predictions for all rows in test.csv.
     """
     # load the saved (last-fitted) model
     output_path = os.path.join(os.path.dirname(__file__), "../model", filename)
@@ -77,12 +114,12 @@ def load_model_elbow(filename: str, sse: list):
     print(f"Optimal no. of clusters: {kl.elbow}")
 
     # predict on raw test data (matches your original code)
-    df = pd.read_csv(os.path.join(os.path.dirname(__file__), "../data/test.csv"))
-    pred = loaded_model.predict(df)[0]
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), "../data/test.csv"))[CLUSTER_COLUMNS]
+    predictions = loaded_model.predict(df)
+    prediction_list = [int(pred) for pred in predictions]
+    print(f"Predictions for test.csv rows: {prediction_list}")
 
-    # ensure JSON-safe return
-    try:
-        return int(pred)
-    except Exception:
-        # if not numeric, still return a JSON-friendly version
-        return pred.item() if hasattr(pred, "item") else pred
+    return {
+        "test_rows": int(len(df)),
+        "predictions": prediction_list,
+    }
